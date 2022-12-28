@@ -120,6 +120,28 @@ fn non_virtual_default_members_build_other_member() {
 }
 
 #[cargo_test]
+fn short_form_of_manifest_path_arg_works() {
+    let p = project()
+        .file(
+            "Cargo.toml",
+            r#"
+                [workspace]
+                members = ["bar"]
+            "#,
+        )
+        .file("bar/Cargo.toml", &basic_manifest("bar", "0.1.0"))
+        .file("bar/src/lib.rs", "pub fn bar() {}")
+        .build();
+
+    p.cargo("build -m bar/Cargo.toml")
+        .with_stderr(
+            "[..] Compiling bar v0.1.0 ([..])\n\
+             [..] Finished dev [unoptimized + debuginfo] target(s) in [..]\n",
+        )
+        .run();
+}
+
+#[cargo_test]
 fn non_virtual_default_members_build_root_project() {
     let p = project()
         .file(

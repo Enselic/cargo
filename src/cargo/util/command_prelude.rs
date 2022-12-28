@@ -170,7 +170,11 @@ pub trait CommandExt: Sized {
     }
 
     fn arg_manifest_path(self) -> Self {
-        self._arg(opt("manifest-path", "Path to Cargo.toml").value_name("PATH"))
+        self._arg(
+            opt("manifest-path", "Path to Cargo.toml")
+                .short('m')
+                .value_name("PATH"),
+        )
     }
 
     fn arg_message_format(self) -> Self {
