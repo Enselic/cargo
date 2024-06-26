@@ -406,6 +406,33 @@ Alternatively, to keep it out of the workspace, add the package to the `workspac
 }
 
 #[cargo_test]
+fn excluded_subcrate_of_workspace_member() {
+    let p = project()
+        .file(
+            "Cargo.toml",
+            r#"
+                [workspace]
+                members = [
+                    "member",
+                ]
+                exclude = [
+                    "member/excluded",
+                ]
+            "#,
+        )
+        .file("member/src/main.rs", "fn main() {}")
+        .file("member/Cargo.toml", &basic_manifest("member", "0.1.0"))
+        .file("member/excluded/src/main.rs", "fn main() {}")
+        .file(
+            "member/excluded/Cargo.toml",
+            &basic_manifest("excluded", "0.1.0"),
+        );
+    let p = p.build();
+
+    p.cargo("check").cwd("member/excluded").run();
+}
+
+#[cargo_test]
 fn invalid_parent_pointer() {
     let p = project()
         .file(
