@@ -11,7 +11,8 @@ description = "Deserialization schemas for Cargo"
 [dependencies]
 schemars = { workspace = true, features = ["preserve_order", "semver1"], optional = true }
 semver.workspace = true
-serde = { workspace = true, features = ["derive"] }
+serde.workspace = true
+serde_derive.workspace = true
 serde_json = { workspace = true, optional = true }
 serde-untagged.workspace = true
 serde-value.workspace = true

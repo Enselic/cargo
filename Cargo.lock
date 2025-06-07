@@ -358,6 +358,7 @@ dependencies = [
  "semver",
  "serde",
  "serde-untagged",
+ "serde_derive",
  "serde_ignored",
  "serde_json",
  "sha1",
@@ -389,6 +390,7 @@ dependencies = [
  "anyhow",
  "libc",
  "serde",
+ "serde_derive",
  "serde_json",
  "snapbox",
  "thiserror 2.0.12",
@@ -402,6 +404,7 @@ version = "0.4.5"
 dependencies = [
  "cargo-credential",
  "serde",
+ "serde_derive",
  "serde_json",
 ]
 
@@ -468,6 +471,7 @@ dependencies = [
  "pasetors",
  "regex",
  "serde",
+ "serde_derive",
  "serde_json",
  "snapbox",
  "tar",
@@ -508,6 +512,7 @@ dependencies = [
  "serde",
  "serde-untagged",
  "serde-value",
+ "serde_derive",
  "serde_json",
  "snapbox",
  "thiserror 2.0.12",
@@ -706,6 +711,7 @@ dependencies = [
  "curl",
  "percent-encoding",
  "serde",
+ "serde_derive",
  "serde_json",
  "thiserror 2.0.12",
  "url",
@@ -2948,9 +2954,9 @@ dependencies = [
 
 [[package]]
 name = "pasetors"
-version = "0.7.4"
+version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb798c661c80718af935bea17997928937822e7369cd087667ff4179f9146551"
+checksum = "8c1c6d47c07a08cb59ddad44d53cb5729855e35f7d993184cec3aa37ccdb7008"
 dependencies = [
  "ct-codecs",
  "ed25519-compact",
@@ -2960,6 +2966,7 @@ dependencies = [
  "rand_core 0.6.4",
  "regex",
  "serde",
+ "serde_derive",
  "serde_json",
  "sha2",
  "subtle",
@@ -3440,6 +3447,7 @@ dependencies = [
  "anyhow",
  "proptest",
  "serde",
+ "serde_derive",
  "serde_json",
  "similar",
  "snapbox",

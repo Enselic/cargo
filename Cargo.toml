@@ -90,6 +90,7 @@ schemars = "0.9.0"
 security-framework = "3.2.0"
 semver = { version = "1.0.25", features = ["serde"] }
 serde = "1.0.217"
+serde_derive = "1.0.217"
 serde-untagged = "0.1.6"
 serde-value = "0.7.0"
 serde_ignored = "0.1.10"
@@ -199,7 +200,8 @@ rustc-stable-hash.workspace = true
 rustfix.workspace = true
 same-file.workspace = true
 semver.workspace = true
-serde = { workspace = true, features = ["derive"] }
+serde.workspace = true
+serde_derive.workspace = true
 serde-untagged.workspace = true
 serde_ignored.workspace = true
 serde_json = { workspace = true, features = ["raw_value"] }

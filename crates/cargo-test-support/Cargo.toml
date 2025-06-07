@@ -22,7 +22,8 @@ glob.workspace = true
 itertools.workspace = true
 pasetors.workspace = true
 regex.workspace = true
-serde = { workspace = true, features = ["derive"] }
+serde.workspace = true
+serde_derive.workspace = true
 serde_json.workspace = true
 snapbox.workspace = true
 tar.workspace = true
