@@ -31,7 +31,7 @@ pub struct SourceConfigMap<'gctx> {
 }
 
 /// Definition of a source in a config file.
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, serde_derive::Deserialize)]
 #[serde(rename_all = "kebab-case")]
 struct SourceConfigDef {
     /// Indicates this source should be replaced with another of the given name.

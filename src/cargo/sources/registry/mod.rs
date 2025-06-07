@@ -195,8 +195,8 @@ use std::task::{ready, Poll};
 use anyhow::Context as _;
 use cargo_util::paths::{self, exclude_from_backups_and_indexing};
 use flate2::read::GzDecoder;
-use serde::Deserialize;
-use serde::Serialize;
+use serde_derive::Deserialize;
+use serde_derive::Serialize;
 use tar::Archive;
 use tracing::debug;
 

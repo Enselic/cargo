@@ -1,4 +1,4 @@
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use std::error::Error as StdError;
 use thiserror::Error as ThisError;
 
@@ -131,7 +131,7 @@ mod error_serialize {
     where
         D: Deserializer<'de>,
     {
-        #[derive(Deserialize)]
+        #[derive(serde_derive::Deserialize)]
         #[serde(rename_all = "kebab-case")]
         struct ErrorData {
             message: String,

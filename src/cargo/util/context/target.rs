@@ -1,7 +1,7 @@
 use super::{ConfigKey, ConfigRelativePath, GlobalContext, OptValue, PathAndArgs, StringList, CV};
 use crate::core::compiler::{BuildOutput, LibraryPath, LinkArgTarget};
 use crate::util::CargoResult;
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use std::collections::{BTreeMap, HashMap};
 use std::path::{Path, PathBuf};
 use std::rc::Rc;

@@ -12,7 +12,7 @@ use crate::util::{try_canonicalize, CargoResult, GlobalContext};
 use anyhow::{bail, Context as _};
 use cargo_util::{paths, Sha256};
 use cargo_util_schemas::core::SourceKind;
-use serde::Serialize;
+use serde_derive::Serialize;
 use walkdir::WalkDir;
 
 use std::collections::HashSet;

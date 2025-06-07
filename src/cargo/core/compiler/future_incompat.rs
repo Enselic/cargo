@@ -40,7 +40,7 @@ use crate::sources::SourceConfigMap;
 use crate::util::cache_lock::CacheLockMode;
 use crate::util::CargoResult;
 use anyhow::{bail, format_err, Context};
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::fmt::Write as _;
 use std::io::{Read, Write};
@@ -62,7 +62,7 @@ means and how to resolve it.
 const ON_DISK_VERSION: u32 = 0;
 
 /// The future incompatibility report, emitted by the compiler as a JSON message.
-#[derive(serde::Deserialize)]
+#[derive(serde_derive::Deserialize)]
 pub struct FutureIncompatReport {
     pub future_incompat_report: Vec<FutureBreakageItem>,
 }

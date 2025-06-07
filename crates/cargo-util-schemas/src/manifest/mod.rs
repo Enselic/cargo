@@ -15,7 +15,7 @@ use std::str;
 
 use serde::de::{self, IntoDeserializer as _, Unexpected};
 use serde::ser;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use serde_untagged::UntaggedEnumVisitor;
 
 use crate::core::PackageIdSpec;
@@ -31,7 +31,7 @@ pub use rust_version::RustVersionError;
 use crate::schema::TomlValueWrapper;
 
 /// This type is used to deserialize `Cargo.toml` files.
-#[derive(Default, Clone, Debug, Deserialize, Serialize)]
+#[derive(Default, Clone, Debug, serde_derive::Deserialize, serde_derive::Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlManifest {
@@ -119,7 +119,7 @@ impl TomlManifest {
     }
 }
 
-#[derive(Debug, Default, Deserialize, Serialize, Clone)]
+#[derive(Debug, Default, serde_derive::Deserialize, serde_derive::Serialize, Clone)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlWorkspace {
@@ -141,7 +141,7 @@ pub struct TomlWorkspace {
 }
 
 /// A group of fields that are inheritable by members of the workspace
-#[derive(Clone, Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, serde_derive::Deserialize, serde_derive::Serialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct InheritablePackage {
@@ -171,7 +171,7 @@ pub struct InheritablePackage {
 /// are serialized to a TOML file. For example, you cannot have values after
 /// the field `metadata`, since it is a table and values cannot appear after
 /// tables.
-#[derive(Deserialize, Serialize, Clone, Debug, Default)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Clone, Debug, Default)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlPackage {
@@ -327,7 +327,7 @@ impl TomlPackage {
 }
 
 /// An enum that allows for inheriting keys from a workspace in a Cargo.toml.
-#[derive(Serialize, Copy, Clone, Debug)]
+#[derive(serde_derive::Serialize, Copy, Clone, Debug)]
 #[serde(untagged)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum InheritableField<T> {
@@ -604,7 +604,7 @@ impl<'de> de::Deserialize<'de> for InheritableBtreeMap {
     }
 }
 
-#[derive(Deserialize, Serialize, Copy, Clone, Debug)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Copy, Clone, Debug)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlInheritedField {
@@ -625,7 +625,7 @@ impl Default for TomlInheritedField {
     }
 }
 
-#[derive(Deserialize, Serialize, Copy, Clone, Debug)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Copy, Clone, Debug)]
 #[serde(try_from = "bool")]
 #[serde(into = "bool")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
@@ -648,7 +648,7 @@ impl From<WorkspaceValue> for bool {
     }
 }
 
-#[derive(Serialize, Clone, Debug)]
+#[derive(serde_derive::Serialize, Clone, Debug)]
 #[serde(untagged)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum InheritableDependency {
@@ -696,7 +696,7 @@ impl<'de> de::Deserialize<'de> for InheritableDependency {
     }
 }
 
-#[derive(Deserialize, Serialize, Clone, Debug)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Clone, Debug)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlInheritedDependency {
@@ -721,7 +721,7 @@ impl TomlInheritedDependency {
     }
 }
 
-#[derive(Clone, Debug, Serialize)]
+#[derive(Clone, Debug, serde_derive::Serialize)]
 #[serde(untagged)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum TomlDependency<P: Clone = String> {
@@ -787,7 +787,7 @@ impl<'de, P: Deserialize<'de> + Clone> de::Deserialize<'de> for TomlDependency<P
     }
 }
 
-#[derive(Deserialize, Serialize, Clone, Debug)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Clone, Debug)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlDetailedDependency<P: Clone = String> {
@@ -867,7 +867,7 @@ impl<P: Clone> Default for TomlDetailedDependency<P> {
     }
 }
 
-#[derive(Deserialize, Serialize, Clone, Debug, Default)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Clone, Debug, Default)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlProfiles(pub BTreeMap<ProfileName, TomlProfile>);
 
@@ -881,7 +881,7 @@ impl TomlProfiles {
     }
 }
 
-#[derive(Deserialize, Serialize, Clone, Debug, Default, Eq, PartialEq)]
+#[derive(serde_derive::Deserialize, serde_derive::Serialize, Clone, Debug, Default, Eq, PartialEq)]
 #[serde(default, rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlProfile {
@@ -1168,7 +1168,7 @@ impl<'de> de::Deserialize<'de> for TomlDebugInfo {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Ord, PartialOrd, Hash, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Ord, PartialOrd, Hash, serde_derive::Serialize)]
 #[serde(untagged, rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum TomlTrimPaths {
@@ -1261,7 +1261,7 @@ impl From<Vec<TomlTrimPathsValue>> for TomlTrimPaths {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Ord, PartialOrd, Hash, serde_derive::Serialize, serde_derive::Deserialize)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum TomlTrimPathsValue {
@@ -1292,7 +1292,7 @@ pub type TomlExampleTarget = TomlTarget;
 pub type TomlTestTarget = TomlTarget;
 pub type TomlBenchTarget = TomlTarget;
 
-#[derive(Default, Serialize, Deserialize, Debug, Clone)]
+#[derive(Default, serde_derive::Serialize, serde_derive::Deserialize, Debug, Clone)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlTarget {
@@ -1347,7 +1347,7 @@ impl TomlTarget {
 macro_rules! str_newtype {
     ($name:ident) => {
         /// Verified string newtype
-        #[derive(Serialize, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+        #[derive(serde_derive::Serialize, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
         #[serde(transparent)]
         pub struct $name<T: AsRef<str> = String>(T);
 
@@ -1466,7 +1466,7 @@ impl<T: AsRef<str>> PathBaseName<T> {
 }
 
 /// Corresponds to a `target` entry, but `TomlTarget` is already used.
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(serde_derive::Serialize, serde_derive::Deserialize, Debug, Clone)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlPlatform {
@@ -1493,7 +1493,7 @@ impl TomlPlatform {
     }
 }
 
-#[derive(Serialize, Debug, Clone)]
+#[derive(serde_derive::Serialize, Debug, Clone)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct InheritableLints {
     #[serde(skip_serializing_if = "is_false")]
@@ -1569,7 +1569,7 @@ pub type TomlLints = BTreeMap<String, TomlToolLints>;
 
 pub type TomlToolLints = BTreeMap<String, TomlLint>;
 
-#[derive(Serialize, Debug, Clone)]
+#[derive(serde_derive::Serialize, Debug, Clone)]
 #[serde(untagged)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum TomlLint {
@@ -1614,7 +1614,7 @@ impl TomlLint {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(serde_derive::Serialize, serde_derive::Deserialize, Debug, Clone)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct TomlLintConfig {
@@ -1629,7 +1629,7 @@ pub struct TomlLintConfig {
     pub config: toml::Table,
 }
 
-#[derive(Serialize, Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
+#[derive(serde_derive::Serialize, serde_derive::Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
 #[serde(rename_all = "kebab-case")]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum TomlLintLevel {
@@ -1657,7 +1657,7 @@ impl<'de> de::Deserialize<'de> for InvalidCargoFeatures {
 
 /// This can be parsed from either a TOML string or array,
 /// but is always stored as a vector.
-#[derive(Clone, Debug, Serialize, Eq, PartialEq, PartialOrd, Ord)]
+#[derive(Clone, Debug, serde_derive::Serialize, Eq, PartialEq, PartialOrd, Ord)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub struct StringOrVec(pub Vec<String>);
 
@@ -1680,7 +1680,7 @@ impl<'de> de::Deserialize<'de> for StringOrVec {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Eq, PartialEq)]
+#[derive(Clone, Debug, serde_derive::Serialize, Eq, PartialEq)]
 #[serde(untagged)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum StringOrBool {
@@ -1700,7 +1700,7 @@ impl<'de> Deserialize<'de> for StringOrBool {
     }
 }
 
-#[derive(PartialEq, Clone, Debug, Serialize)]
+#[derive(PartialEq, Clone, Debug, serde_derive::Serialize)]
 #[serde(untagged)]
 #[cfg_attr(feature = "unstable-schema", derive(schemars::JsonSchema))]
 pub enum VecStringOrBool {

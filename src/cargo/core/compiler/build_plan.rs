@@ -9,7 +9,7 @@
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
-use serde::Serialize;
+use serde_derive::Serialize;
 
 use super::build_runner::OutputFile;
 use super::{BuildRunner, CompileKind, CompileMode, Unit};

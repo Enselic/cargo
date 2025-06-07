@@ -6,7 +6,7 @@ use std::path::PathBuf;
 
 use cargo_util_schemas::core::PackageIdSpec;
 use itertools::Itertools;
-use serde::Serialize;
+use serde_derive::Serialize;
 
 use crate::core::TargetKind;
 use crate::util::interning::InternedString;

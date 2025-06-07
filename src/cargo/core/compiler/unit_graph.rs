@@ -40,14 +40,14 @@ pub struct UnitDep {
 
 const VERSION: u32 = 1;
 
-#[derive(serde::Serialize)]
+#[derive(serde_derive::Serialize)]
 struct SerializedUnitGraph<'a> {
     version: u32,
     units: Vec<SerializedUnit<'a>>,
     roots: Vec<usize>,
 }
 
-#[derive(serde::Serialize)]
+#[derive(serde_derive::Serialize)]
 struct SerializedUnit<'a> {
     pkg_id: PackageIdSpec,
     target: &'a Target,
@@ -60,7 +60,7 @@ struct SerializedUnit<'a> {
     dependencies: Vec<SerializedUnitDep>,
 }
 
-#[derive(serde::Serialize)]
+#[derive(serde_derive::Serialize)]
 struct SerializedUnitDep {
     index: usize,
     extern_crate_name: InternedString,

@@ -583,7 +583,7 @@ struct DepFingerprint {
 ///
 /// [`hash_u64()`]: crate::core::compiler::fingerprint::Fingerprint::hash_u64
 /// [`DependencyQueue`]: crate::util::DependencyQueue
-#[derive(Serialize, Deserialize)]
+#[derive(serde_derive::Serialize, serde_derive::Deserialize)]
 pub struct Fingerprint {
     /// Hash of the version of `rustc` used.
     rustc: u64,
@@ -725,7 +725,7 @@ impl<'de> Deserialize<'de> for DepFingerprint {
 /// when the filesystem contains stale information (based on mtime currently).
 /// The paths here don't change much between compilations but they're used as
 /// inputs when we probe the filesystem looking at information.
-#[derive(Debug, Serialize, Deserialize, Hash)]
+#[derive(Debug, serde_derive::Serialize, serde_derive::Deserialize, Hash)]
 enum LocalFingerprint {
     /// This is a precalculated fingerprint which has an opaque string we just
     /// hash as usual. This variant is primarily used for rustdoc where we

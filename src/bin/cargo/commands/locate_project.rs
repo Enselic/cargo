@@ -1,7 +1,7 @@
 use crate::command_prelude::*;
 use anyhow::bail;
 use cargo::{drop_println, CargoResult};
-use serde::Serialize;
+use serde_derive::Serialize;
 
 pub fn cli() -> Command {
     subcommand("locate-project")

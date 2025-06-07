@@ -87,7 +87,7 @@ use curl::easy::Easy;
 use itertools::Itertools;
 use lazycell::LazyCell;
 use serde::de::IntoDeserializer as _;
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use serde_untagged::UntaggedEnumVisitor;
 use time::OffsetDateTime;
 use toml_edit::Item;
@@ -1043,7 +1043,7 @@ impl GlobalContext {
         let def = Definition::Environment(key.as_env_key().to_string());
         if self.cli_unstable().advanced_env && env_val.starts_with('[') && env_val.ends_with(']') {
             // Parse an environment string as a TOML array.
-            let toml_v = toml::Value::deserialize(toml::de::ValueDeserializer::new(&env_val))
+            let toml_v = <toml::Value as serde::Deserialize>::deserialize(toml::de::ValueDeserializer::new(&env_val))
                 .map_err(|e| {
                     ConfigError::new(format!("could not parse TOML list: {}", e), def.clone())
                 })?;
@@ -1546,7 +1546,7 @@ impl GlobalContext {
                     );
                 }
 
-                let toml_v: toml::Value = toml::Value::deserialize(doc.into_deserializer())
+                let toml_v: toml::Value = <toml::Value as serde::Deserialize>::deserialize(doc.into_deserializer())
                     .with_context(|| {
                         format!("failed to parse value from --config argument `{arg}`")
                     })?;
@@ -2684,7 +2684,7 @@ pub enum SslVersionConfig {
     Range(SslVersionConfigRange),
 }
 
-impl<'de> Deserialize<'de> for SslVersionConfig {
+impl<'de> serde::Deserialize<'de> for SslVersionConfig {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -2736,7 +2736,7 @@ pub enum JobsConfig {
     String(String),
 }
 
-impl<'de> Deserialize<'de> for JobsConfig {
+impl<'de> serde::Deserialize<'de> for JobsConfig {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -2807,7 +2807,7 @@ enum BuildTargetConfigInner {
     Many(Vec<String>),
 }
 
-impl<'de> Deserialize<'de> for BuildTargetConfigInner {
+impl<'de> serde::Deserialize<'de> for BuildTargetConfigInner {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -2943,7 +2943,7 @@ where
         where
             D: serde::de::Deserializer<'de>,
         {
-            let pc = ProgressConfig::deserialize(deserializer)?;
+            let pc = <ProgressConfig as serde::Deserialize>::deserialize(deserializer)?;
             if let ProgressConfig {
                 when: ProgressWhen::Always,
                 width: None,
@@ -2971,7 +2971,7 @@ enum EnvConfigValueInner {
     },
 }
 
-impl<'de> Deserialize<'de> for EnvConfigValueInner {
+impl<'de> serde::Deserialize<'de> for EnvConfigValueInner {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,

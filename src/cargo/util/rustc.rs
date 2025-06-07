@@ -7,7 +7,7 @@ use std::sync::Mutex;
 use anyhow::Context as _;
 use cargo_util::{paths, ProcessBuilder, ProcessError};
 use filetime::FileTime;
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use tracing::{debug, info, warn};
 
 use crate::core::compiler::apply_env_config;

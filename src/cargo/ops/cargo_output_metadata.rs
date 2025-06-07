@@ -8,7 +8,7 @@ use crate::ops::{self, Packages};
 use crate::util::interning::InternedString;
 use crate::util::CargoResult;
 use cargo_platform::Platform;
-use serde::Serialize;
+use serde_derive::Serialize;
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 

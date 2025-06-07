@@ -61,7 +61,7 @@ impl<'de> serde::de::Deserialize<'de> for RustdocExternMode {
 /// This is for unstable feature [`-Zrustdoc-map`][1].
 ///
 /// [1]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#rustdoc-map
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde_derive::Deserialize, Debug)]
 #[serde(default)]
 pub struct RustdocExternMap {
     #[serde(deserialize_with = "default_crates_io_to_docs_rs")]

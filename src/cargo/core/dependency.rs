@@ -1,7 +1,7 @@
 use cargo_platform::Platform;
 use semver::VersionReq;
 use serde::ser;
-use serde::Serialize;
+use serde_derive::Serialize;
 use std::borrow::Cow;
 use std::fmt;
 use std::path::PathBuf;

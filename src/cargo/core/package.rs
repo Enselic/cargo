@@ -14,7 +14,7 @@ use curl::easy::Easy;
 use curl::multi::{EasyHandle, Multi};
 use lazycell::LazyCell;
 use semver::Version;
-use serde::Serialize;
+use serde_derive::Serialize;
 use tracing::debug;
 
 use crate::core::compiler::{CompileKind, RustcTargetData};

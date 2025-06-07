@@ -6,7 +6,7 @@ use serde_untagged::UntaggedEnumVisitor;
 use crate::core::PartialVersion;
 use crate::core::PartialVersionError;
 
-#[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Debug, serde::Serialize)]
+#[derive(PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Debug, serde_derive::Serialize)]
 #[serde(transparent)]
 pub struct RustVersion(PartialVersion);
 

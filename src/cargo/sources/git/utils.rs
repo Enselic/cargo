@@ -13,7 +13,7 @@ use cargo_util::{paths, ProcessBuilder};
 use curl::easy::List;
 use git2::{ErrorClass, ObjectType, Oid};
 use serde::ser;
-use serde::Serialize;
+use serde_derive::Serialize;
 use std::borrow::Cow;
 use std::fmt;
 use std::path::{Path, PathBuf};

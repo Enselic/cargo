@@ -4,7 +4,7 @@
 //!
 //! For examples of the JSON output, see JSON fixture files under `tests/` directory.
 
-use serde::Deserialize;
+use serde_derive::Deserialize;
 
 /// The root diagnostic JSON output emitted by the compiler.
 #[derive(Clone, Deserialize, Debug, Hash, Eq, PartialEq)]

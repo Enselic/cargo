@@ -16,7 +16,7 @@ use crate::util::{CargoResult, Rustc};
 use anyhow::Context as _;
 use cargo_platform::{Cfg, CfgExpr};
 use cargo_util::{paths, ProcessBuilder};
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use std::cell::RefCell;
 use std::collections::hash_map::{Entry, HashMap};
 use std::path::{Path, PathBuf};

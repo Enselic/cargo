@@ -11,7 +11,7 @@ use cargo_util_schemas::manifest::RustVersion;
 use cargo_util_schemas::manifest::{TomlManifest, TomlProfiles};
 use semver::Version;
 use serde::ser;
-use serde::Serialize;
+use serde_derive::Serialize;
 use url::Url;
 
 use crate::core::compiler::rustdoc::RustdocScrapeExamples;

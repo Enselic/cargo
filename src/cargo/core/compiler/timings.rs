@@ -82,7 +82,7 @@ struct UnitTime {
 }
 
 /// Periodic concurrency tracking information.
-#[derive(serde::Serialize)]
+#[derive(serde_derive::Serialize)]
 struct Concurrency {
     /// Time as an offset in seconds from `Timings::start`.
     t: f64,
@@ -444,7 +444,7 @@ impl<'gctx> Timings<'gctx> {
             .enumerate()
             .map(|(i, ut)| (ut.unit.clone(), i))
             .collect();
-        #[derive(serde::Serialize)]
+        #[derive(serde_derive::Serialize)]
         struct UnitData {
             i: usize,
             name: String,

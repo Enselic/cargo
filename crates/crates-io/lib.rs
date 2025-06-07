@@ -9,7 +9,7 @@ use std::time::Instant;
 
 use curl::easy::{Easy, List};
 use percent_encoding::{percent_encode, NON_ALPHANUMERIC};
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use url::Url;
 
 pub type Result<T> = std::result::Result<T, Error>;

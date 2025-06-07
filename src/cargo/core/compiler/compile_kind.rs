@@ -5,7 +5,7 @@ use crate::util::errors::CargoResult;
 use crate::util::interning::InternedString;
 use crate::util::{try_canonicalize, GlobalContext, StableHasher};
 use anyhow::Context as _;
-use serde::Serialize;
+use serde_derive::Serialize;
 use std::collections::BTreeSet;
 use std::fs;
 use std::hash::{Hash, Hasher};

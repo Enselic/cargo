@@ -24,7 +24,7 @@ use crate::ops::CleanContext;
 use crate::util::cache_lock::{CacheLock, CacheLockMode};
 use crate::{CargoResult, GlobalContext};
 use anyhow::{format_err, Context as _};
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use std::time::Duration;
 
 /// Default max age to auto-clean extracted sources, which can be recovered

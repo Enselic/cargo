@@ -10,7 +10,7 @@ use anyhow::{bail, format_err, Context as _};
 use cargo_util::paths;
 use cargo_util_schemas::core::PartialVersion;
 use ops::FilterRule;
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 
 use crate::core::compiler::{DirtyReason, Freshness};
 use crate::core::Target;

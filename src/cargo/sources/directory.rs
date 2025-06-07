@@ -14,7 +14,7 @@ use crate::util::GlobalContext;
 
 use anyhow::Context as _;
 use cargo_util::{paths, Sha256};
-use serde::Deserialize;
+use serde_derive::Deserialize;
 
 /// `DirectorySource` contains a number of crates on the file system. It was
 /// designed for representing vendored dependencies for `cargo vendor`.

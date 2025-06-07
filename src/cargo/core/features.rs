@@ -126,7 +126,7 @@ use std::str::FromStr;
 
 use anyhow::{bail, Error};
 use cargo_util::ProcessBuilder;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 use crate::core::resolver::ResolveBehavior;
 use crate::util::errors::CargoResult;
@@ -178,7 +178,7 @@ pub type AllowFeatures = BTreeSet<String>;
 /// [`toml`]: crate::util::toml
 /// [`features!`]: macro.features.html
 #[derive(
-    Default, Clone, Copy, Debug, Hash, PartialOrd, Ord, Eq, PartialEq, Serialize, Deserialize,
+    Default, Clone, Copy, Debug, Hash, PartialOrd, Ord, Eq, PartialEq, serde_derive::Serialize, serde_derive::Deserialize,
 )]
 pub enum Edition {
     /// The 2015 edition
@@ -363,7 +363,7 @@ impl FromStr for Edition {
 }
 
 /// The value for `-Zfix-edition`.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, serde_derive::Deserialize)]
 pub enum FixEdition {
     /// `-Zfix-edition=start=$INITIAL`
     ///
@@ -767,7 +767,7 @@ macro_rules! unstable_cli_options {
         /// Cargo, like `rustc`, accepts a suite of `-Z` flags which are intended for
         /// gating unstable functionality to Cargo. These flags are only available on
         /// the nightly channel of Cargo.
-        #[derive(Default, Debug, Deserialize)]
+        #[derive(Default, Debug, serde_derive::Deserialize)]
         #[serde(default, rename_all = "kebab-case")]
         pub struct CliUnstable {
             $(
@@ -957,7 +957,7 @@ where
     Ok(Some(v))
 }
 
-#[derive(Debug, Copy, Clone, Default, Deserialize, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Copy, Clone, Default, serde_derive::Deserialize, Ord, PartialOrd, Eq, PartialEq)]
 #[serde(default)]
 pub struct GitFeatures {
     /// When cloning the index, perform a shallow clone. Maintain shallowness upon subsequent fetches.
@@ -1053,7 +1053,7 @@ fn parse_git(it: impl Iterator<Item = impl AsRef<str>>) -> CargoResult<Option<Gi
     Ok(Some(out))
 }
 
-#[derive(Debug, Copy, Clone, Default, Deserialize, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Copy, Clone, Default, serde_derive::Deserialize, Ord, PartialOrd, Eq, PartialEq)]
 #[serde(default)]
 pub struct GitoxideFeatures {
     /// All fetches are done with `gitoxide`, which includes git dependencies as well as the crates index.

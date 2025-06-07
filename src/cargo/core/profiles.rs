@@ -605,7 +605,7 @@ pub enum ProfileRoot {
 
 /// Profile settings used to determine which compiler flags to use for a
 /// target.
-#[derive(Clone, Eq, PartialOrd, Ord, serde::Serialize)]
+#[derive(Clone, Eq, PartialOrd, Ord, serde_derive::Serialize)]
 pub struct Profile {
     pub name: InternedString,
     pub opt_level: InternedString,
@@ -765,7 +765,7 @@ impl Profile {
 /// cause to build a unit twice. By deferring the choice until we know
 /// whether to choose the optimized value or the default value, we can make sure
 /// the unit is only built once and the unit graph is still optimized.
-#[derive(Debug, Copy, Clone, serde::Serialize)]
+#[derive(Debug, Copy, Clone, serde_derive::Serialize)]
 #[serde(untagged)]
 pub enum DebugInfo {
     /// A debuginfo level that is fixed and will not change.
@@ -868,7 +868,7 @@ impl serde::ser::Serialize for Lto {
 }
 
 /// The `panic` setting.
-#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash, PartialOrd, Ord, serde::Serialize)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash, PartialOrd, Ord, serde_derive::Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum PanicStrategy {
     Unwind,
@@ -886,7 +886,7 @@ impl fmt::Display for PanicStrategy {
 }
 
 #[derive(
-    Clone, Copy, PartialEq, Eq, Debug, Hash, PartialOrd, Ord, serde::Serialize, serde::Deserialize,
+    Clone, Copy, PartialEq, Eq, Debug, Hash, PartialOrd, Ord, serde_derive::Serialize, serde_derive::Deserialize,
 )]
 pub enum StripInner {
     /// Don't remove any symbols
@@ -914,7 +914,7 @@ impl fmt::Display for StripInner {
 /// for optimization purposes: when no package being compiled requires debuginfo,
 /// then we can strip debuginfo to remove pre-existing debug symbols from the
 /// standard library.
-#[derive(Clone, Copy, Debug, Eq, serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, serde_derive::Serialize, serde_derive::Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Strip {
     /// A strip option that is fixed and will not change.

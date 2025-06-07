@@ -7,7 +7,7 @@ use anyhow::{anyhow, Context as _};
 use cargo_util::paths::{self, write_atomic};
 use cargo_util_schemas::manifest::PackageName;
 use serde::de;
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use std::collections::BTreeMap;
 use std::ffi::OsStr;
 use std::io::{BufRead, BufReader, ErrorKind};

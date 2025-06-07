@@ -11,7 +11,7 @@ use cargo_credential::{
 };
 
 use core::fmt;
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use std::error::Error;
 use time::{Duration, OffsetDateTime};
 use url::Url;

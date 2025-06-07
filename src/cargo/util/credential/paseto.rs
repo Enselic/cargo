@@ -20,7 +20,7 @@ use crate::{
 };
 
 /// The main body of an asymmetric token as describe in RFC 3231.
-#[derive(serde::Serialize)]
+#[derive(serde_derive::Serialize)]
 struct Message<'a> {
     iat: &'a str,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -40,7 +40,7 @@ struct Message<'a> {
     v: Option<u8>,
 }
 /// The footer of an asymmetric token as describe in RFC 3231.
-#[derive(serde::Serialize)]
+#[derive(serde_derive::Serialize)]
 struct Footer<'a> {
     url: &'a str,
     kip: pasetors::paserk::Id,

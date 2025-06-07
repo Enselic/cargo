@@ -6,7 +6,7 @@ use std::path::PathBuf;
 
 use anyhow::Context as _;
 use cargo_util::paths;
-use serde::Serialize;
+use serde_derive::Serialize;
 use tracing::debug;
 
 use crate::core::Package;

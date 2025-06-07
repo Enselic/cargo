@@ -30,7 +30,7 @@ use crate::util::{internal, CargoResult, Filesystem, GlobalContext, OptVersionRe
 use cargo_util::registry::make_dep_path;
 use cargo_util_schemas::manifest::RustVersion;
 use semver::Version;
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::collections::HashMap;

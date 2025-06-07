@@ -1,7 +1,7 @@
 use std::fmt;
 use std::ops::Deref;
 
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 
 /// A wrapper for values that should not be printed.
 ///

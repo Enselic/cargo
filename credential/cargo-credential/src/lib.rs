@@ -43,7 +43,7 @@
 #![allow(clippy::print_stderr)]
 #![allow(clippy::print_stdout)]
 
-use serde::{Deserialize, Serialize};
+use serde_derive::{Deserialize, Serialize};
 use std::{fmt::Display, io};
 use time::OffsetDateTime;
 

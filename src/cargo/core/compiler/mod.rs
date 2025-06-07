@@ -1915,7 +1915,7 @@ fn on_stderr_line_inner(
             render_diagnostics: true,
             ..
         } => {
-            #[derive(serde::Deserialize)]
+            #[derive(serde_derive::Deserialize)]
             struct CompilerMessage<'a> {
                 // `rendered` contains escape sequences, which can't be
                 // zero-copy deserialized by serde_json.
@@ -1936,13 +1936,13 @@ fn on_stderr_line_inner(
             // hit serde_json's default recursion limit, or overflow the stack
             // if we turn that off. Cargo only cares about the 1 field listed
             // here.
-            #[derive(serde::Deserialize)]
+            #[derive(serde_derive::Deserialize)]
             struct PartialDiagnostic {
                 spans: Vec<PartialDiagnosticSpan>,
             }
 
             // A partial rustfix::diagnostics::DiagnosticSpan.
-            #[derive(serde::Deserialize)]
+            #[derive(serde_derive::Deserialize)]
             struct PartialDiagnosticSpan {
                 suggestion_applicability: Option<Applicability>,
             }
@@ -1984,7 +1984,7 @@ fn on_stderr_line_inner(
         // enabled. Cargo always asks for ANSI colors from rustc. This allows
         // cached replay to enable/disable colors without re-invoking rustc.
         MessageFormat::Json { ansi: false, .. } => {
-            #[derive(serde::Deserialize, serde::Serialize)]
+            #[derive(serde_derive::Deserialize, serde_derive::Serialize)]
             struct CompilerMessage<'a> {
                 rendered: String,
                 #[serde(flatten, borrow)]
@@ -2010,7 +2010,7 @@ fn on_stderr_line_inner(
     //
     // Look for a matching directive and inform Cargo internally that a
     // metadata file has been produced.
-    #[derive(serde::Deserialize)]
+    #[derive(serde_derive::Deserialize)]
     struct ArtifactNotification<'a> {
         #[serde(borrow)]
         artifact: Cow<'a, str>,
@@ -2033,7 +2033,7 @@ fn on_stderr_line_inner(
         return Ok(true);
     }
 
-    #[derive(serde::Deserialize)]
+    #[derive(serde_derive::Deserialize)]
     struct CompilerMessage<'a> {
         #[serde(borrow)]
         message: Cow<'a, str>,
